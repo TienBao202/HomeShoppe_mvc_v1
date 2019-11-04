@@ -1,0 +1,112 @@
+﻿@model PagedList.IPagedList<Model.EF.Footer>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@section header{
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý Footer</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="well" style="overflow: auto">
+            @using (Html.BeginForm("Index", "Footer", FormMethod.Get))
+            {
+                <div class="form-group">
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <input type="text" class="form-control" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa">
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        <button type="submit" class="btn btn-primary float-left"><i class="fa fa-search"></i>Tìm kiếm</button>
+                        <a href="@Url.Action("ThemMoi","Footer")" class="btn btn-primary float-left" style="margin-left: 5px;"><i class="fa fa-plus"></i> Thêm mới</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách Footer</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title">Mã Footer </th>
+                                <th class="column-title">Tình trạng </th>
+                                <th class="column-title no-link last">
+                                    <span class="nobr">Action</span>
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                                <tr class="even pointer">
+                                    <td class="a-center ">@item.ID</td>
+                                    <td class=" ">
+                                        @if (item.Status != true)
+                                        {
+                                            <span class="badge bg-red">@Html.Raw("Đã khóa")</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-green">@Html.Raw("Đang sử dụng")</span>
+                                        }
+                                    </td>
+                                    <td class=" last">
+                                        <a href="@Url.Action("ChiTiet", new { @id = item.ID })" class="btn-sm btn-success" data-toggle="tooltip" title="Chi tiết"><i class="fa fa-search-plus"></i></a>
+                                        <a href="@Url.Action("CapNhat", new { @id = item.ID })" class="btn-sm btn-primary" data-toggle="tooltip" title="Chỉnh sửa"><i class="fa fa-pencil"></i></a>
+                                        <a href="@Url.Action("Xoa", new { @id = item.ID })" class="btn-sm btn-danger" data-toggle="tooltip" title="Xóa"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="nav navbar-right panel_toolbox">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.searchString }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

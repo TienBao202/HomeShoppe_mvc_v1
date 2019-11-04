@@ -1,0 +1,167 @@
+﻿@model Model.EF.User
+
+@{
+    ViewBag.Title = "ThemMoi";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@section header{
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý thành viên</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-8 col-sm-5 col-xs-12 form-group pull-right top_search">
+                @using (Html.BeginForm("Index", "ThanhVien", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control col-md-7 col-xs-12" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Tìm kiếm</button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Xóa thành viên</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
+                    <div class="profile_img">
+                        <div id="crop-avatar">
+                            <!-- Current avatar -->
+                            <img class="img-responsive avatar-view" src="~/Content/admin/production/images/user3.jpg" alt="Avatar" title="Change the avatar">
+                        </div>
+                    </div>
+                    <h3>Tài khoản: @Html.DisplayFor(model => model.UserName)</h3>
+
+                    <ul class="list-unstyled user_data">
+                        <li>
+                            <i class="fa fa-map-marker user-profile-icon"></i> Địa chỉ: @Html.DisplayFor(model => model.Address)
+                        </li>
+                        <li>
+                            <i class="fa fa-briefcase user-profile-icon"></i> Loại thành viên: @Html.DisplayFor(model => model.UserGroup.Name)
+                        </li>
+                        <li>
+                            <i class="fa fa-check-square-o user-profile-icon"></i> Tình trạng tài khoản: <span class="badge @ViewBag.status_class">@ViewBag.status</span>
+                        </li>
+                    </ul>
+                    <br />
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12">
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Thông tin tài khoản</a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Lịch sử truy cập</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+
+                                <!-- start recent activity -->
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <th style="width:50%">Mã số thành viên: </th>
+                                                <td>@Html.DisplayFor(model => model.ID)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tài khoản: </th>
+                                                <td>@Html.DisplayFor(model => model.UserName)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Họ và tên:</th>
+                                                <td>@Html.DisplayFor(model => model.Name)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Ngày sinh:</th>
+                                                <td>@ViewBag.Birthday</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Giới tính:</th>
+                                                <td>@Html.DisplayFor(model => model.Gender)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Địa chỉ:</th>
+                                                <td>@Html.DisplayFor(model => model.Address)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Email:</th>
+                                                <td>@Html.DisplayFor(model => model.Email)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Điện thoại:</th>
+                                                <td>@Html.DisplayFor(model => model.Phone)</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Tình trạng tài khoản:</th>
+                                                <td><span class="badge @ViewBag.status_class">@ViewBag.status</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- end recent activity -->
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                <!-- start user projects -->
+                                <!-- end user projects -->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="ln_solid"></div>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-success" type="submit" value="Xoa"><i class="fa fa-trash-o"></i> Xóa thành viên</button>
+                            <a href="@Url.Action("Index","ThanhVien")" class="btn btn-danger"><i class="fa fa-times"></i> Hủy bỏ</a>
+                        </div>
+                    </div>
+
+                }               
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+

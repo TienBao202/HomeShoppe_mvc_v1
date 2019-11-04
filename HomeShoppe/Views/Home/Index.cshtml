@@ -1,0 +1,304 @@
+﻿
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var slide = (List<Model.EF.Slide>)ViewBag.slide;
+    var khuyenmaihot = (List<Model.EF.Product>)ViewBag.KhuyenMaiHot;
+    var sanphamnoibat = (List<Model.EF.Product>)ViewBag.SanPhamNoiBat;
+    var xemnhieunhat = (List<Model.EF.Product>)ViewBag.XemNhieuNhat;
+    var sanphammoi = (List<Model.EF.Product>)ViewBag.SanPhamMoi;
+    var danhmucnoibat = (List<Model.EF.ProductCategory>)ViewBag.DanhMucNoiBat;
+}
+
+@section DanhMuc{
+    @{Html.RenderAction("DanhMucTrangChu", "ProductCategory");}
+}
+
+@section slide{
+    <div id="home">
+        <!-- container -->
+        <div class="container">
+            <!-- home wrap -->
+            <div class="home-wrap">
+                <!-- home slick -->
+                <div id="home-slick">
+                    <!-- banner -->
+                    @foreach (var item in slide)
+                    {
+                        <a href="@item.Link">
+                            <div class="banner banner-1">
+                                <img src="@item.Image" alt="">
+                                <div class="banner-caption text-center">
+                                    @*<h1 class="primary-color">Hot sale</h1>
+                                        <h3 class="white-color font-weak">Giảm tới 50%</h3>*@
+                                    @*<a href="@item.Link" class="primary-btn">Mua ngay</a>*@
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    <!-- /banner -->
+                </div>
+                <!-- /home slick -->
+            </div>
+            <!-- /home wrap -->
+        </div>
+        <!-- /container -->
+    </div>
+}
+
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section-title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">DANH MỤC QUAN TÂM</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-1 custom-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /section-title -->
+            <!-- banner -->
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/sach-VPP-1" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/Nha-sach.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Nhà Sách Online</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/the-thao-da-ngoai-1" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/The-thao-da-ngoai.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Thể Thao - Dã Ngoại</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/tivi-thiet-bi-nghe-nhin-2" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/tivi-thiet-bi-nghe-nhin.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Tivi - Thiết Bị Nghe Nhìn</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/dien-thoai-may-tinh-bang-1" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/dien-thoai-may-tinh-bang.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Điện Thoại - Tablet</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/lap-top-may-vi-tinh-4" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/Lap-top-may-vi-tinh.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Laptop - Máy Vi Tính</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2 col-sm-2">
+                <div class="product product-single product-hot">
+                    <div class="product-thumb">
+                        <a href="/san-pham/phu-kien-thiet-bi-so-3" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                        <img src="~/img/images/category/thiet-bi-so-phu-kien-so.png" />
+                    </div>
+                    <div class="product-body">
+                        <span class="product-price"><a href="#" style="font-size:11px"><b>Phụ Kiện - Thiết Bị Số</b></a></span>
+                    </div>
+                </div>
+            </div>
+            <!-- /banner -->
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section-title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">KHUYẾN MÃI HOT</h2>
+                    <div class="pull-right">
+                        <div class="product-slick-dots-1 custom-dots"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /section-title -->
+            <!-- Product Slick -->
+            @foreach (var item in khuyenmaihot)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="product product-single">
+                        <div class="product-thumb">
+                            <div class="product-label">
+                                <span class="sale">-20%</span>
+                            </div>
+                            <ul class="product-countdown">
+                                <li><span>12 H</span></li>
+                                <li><span>00 M</span></li>
+                                <li><span>00 S</span></li>
+                            </ul>
+                            <a href="@url" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                            <img width="270" height="320" src="@item.Image" alt="">
+                        </div>
+                        <div class="product-body">
+                            <h2 class="product-name"><a href="@url">@item.Name</a></h2>
+                            <hr />
+                            @if (item.PromotionPrice != null)
+                            {
+                                <h3 class="product-price">
+                                    @item.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.')
+                                    <del class="product-old-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</del>
+                                </h3>
+                            }
+                            else
+                            {
+                                <h3 class="product-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</h3>
+                            }
+                            <div class="product-btns">
+                                <a href="/them-gio-hang?productid=@item.ID&quantity=1" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- /Product Slick -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">DÀNH RIÊNG CHO BẠN</h2>
+                </div>
+            </div>
+            <!-- section title -->
+            <!-- Product Single -->
+            @foreach (var item in sanphammoi)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="product product-single">
+                        <div class="product-thumb">
+                            <a href="@url" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                            <img width="270" height="320" src="@item.Image" alt="">
+                        </div>
+                        <div class="product-body">
+                            <h2 class="product-name"><a href="@url">@item.Name</a></h2>
+                            <hr />
+                            @if (item.PromotionPrice != null)
+                            {
+                                <h3 class="product-price">
+                                    @item.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.')
+                                    <del class="product-old-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</del>
+                                </h3>
+                            }
+                            else
+                            {
+                                <h3 class="product-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</h3>
+                            }
+                            <div class="product-btns">
+                                <a href="/them-gio-hang?productid=@item.ID&quantity=1" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- /Product Single -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+@*<!-- Product style 1 -->
+    <div class="ee-product">
+
+        <!-- Image -->
+        <div class="image">
+
+            <a href="single-product.html" class="img"><img width="270" height="320" src="@item.Image" alt="Product Image"></a>
+
+            <div class="wishlist-compare">
+                <a href="#" data-tooltip="Làm mới"><i class="fa fa-refresh"></i></a>
+                <a href="#" data-tooltip="Yêu thích"><i class="fa fa-heart"></i></a>
+            </div>
+
+            <a href="@url" class="add-to-cart"><i class="fa fa-shopping-cart"></i><span>Mua hàng</span></a>
+
+        </div>
+
+        <!-- Content -->
+        <div class="content">
+
+            <!-- Category & Title -->
+            <div class="category-title">
+
+                <a href="#" class="cat">Laptop</a>
+                <h5 class="title"><a href="single-product.html">@item.Name</a></h5>
+
+            </div>
+
+            <!-- Price & Ratting -->
+            <div class="price-ratting">
+
+                <h5 class="price"><span class="old">@(item.Price.HasValue ? item.Price.Value.ToString(" 0,0 vnđ") : "")
+                     </span>@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString(" 0,0 vnđ") : "Liên hệ")</h5>
+                <div class="image">
+                    <span class="label new">-20%</span>
+                </div>
+                <div class="ratting">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- Product End -->*@

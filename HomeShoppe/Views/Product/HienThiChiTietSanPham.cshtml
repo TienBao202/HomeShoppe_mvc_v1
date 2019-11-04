@@ -1,0 +1,259 @@
+﻿@model Model.EF.Product
+
+@{
+
+    ViewBag.Title = "sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var categorydetail = (Model.EF.ProductCategory)ViewBag.CategoryDetail;
+    var sanphamcungloai = (List<Model.EF.Product>)ViewBag.SanPhamCungLoai;
+}
+
+@section DanhMuc{
+    @{Html.RenderAction("DanhMucThuNho", "ProductCategory");}
+}
+
+@section breadcrumb{
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                <li><a href="san-pham">Sản phẩm</a></li>
+                <li><a href="/san-pham/@categorydetail.MetaTitle-@categorydetail.ID">@categorydetail.Name</a></li>
+                <li class="active">@Model.Name</li>
+            </ul>
+        </div>
+    </div>
+}
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!--  Product Details -->
+            <div class="product product-details clearfix">
+                <div class="col-md-6">
+                    <div id="product-main-view">
+                        <div class="product-view">
+                            <img src="@Model.Image" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/main-product02.jpg" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/main-product03.jpg" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/main-product04.jpg" alt="">
+                        </div>
+                    </div>
+                    <div id="product-view">
+                        <div class="product-view">
+                            <img src="./img/thumb-product01.jpg" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/thumb-product02.jpg" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/thumb-product03.jpg" alt="">
+                        </div>
+                        <div class="product-view">
+                            <img src="./img/thumb-product04.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-body">
+                        <div class="product-label">
+
+                        </div>
+                        <h2 class="product-name">@Model.Name</h2>
+                        @if (Model.PromotionPrice != null)
+                        {
+                            <h3 class="product-price">
+                                @Model.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.')
+                                <del class="product-old-price">@Model.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</del>
+                            </h3>
+                        }
+                        else
+                        {
+                            <h3 class="product-price">@Model.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</h3>
+                        }                        
+                        <div>
+                            <div class="product-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o empty"></i>
+                            </div>
+                            <a href="#"></a>
+                        </div>
+                        <p>
+                            <strong>Tình trạng:</strong>
+                            @if (Model.Quantity == 0)
+                            {
+                                <span class="label label-danger">@Html.Raw("Hết hàng")</span>
+                            }
+                            else
+                            {
+                                <span class="label label-primary">@Html.Raw("Còn hàng")</span>
+                            }
+                        </p>
+                        <p><strong>Bảo hành:</strong> @Model.Warranty tháng.</p>
+                        <hr />
+                        <div class="product-btns">
+                            <div class="qty-input">
+                                <span class="text-uppercase">Số lượng: </span>
+                                <input class="input" type="number">
+                            </div>
+                            <a href="/them-gio-hang?productid=@Model.ID&quantity=1" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                            <div class="pull-right">
+                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                                <button class="main-btn icon-btn"><i class="fa fa-exchange"></i></button>
+                                <button class="main-btn icon-btn"><i class="fa fa-share-alt"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="product-tab">
+                        <ul class="tab-nav">
+                            <li class="active"><a data-toggle="tab" href="#tab1">Mô tả sản phẩm</a></li>
+                            <li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
+                            <li><a data-toggle="tab" href="#tab3">Đánh giá</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="tab1" class="tab-pane fade in active">
+                                <p>
+                                    @Html.Raw(Model.Description)
+                                </p>
+                            </div>
+                            <div id="tab2" class="tab-pane fade in">
+                                <p>
+                                    @Html.Raw(Model.Detail)
+                                </p>
+                            </div>
+                            <div id="tab3" class="tab-pane fade in">
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="product-reviews">
+                                            <div class="single-review">
+                                                <div class="review-heading">
+                                                    <div><a href="#"><i class="fa fa-user-o"></i> Nguyễn Văn A</a></div>
+                                                    <div><a href="#"><i class="fa fa-clock-o"></i> 12-12-2018 / 8:0 PM</a></div>
+                                                    <div class="review-rating pull-right">
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star"></i>
+                                                        <i class="fa fa-star-o empty"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="review-body">
+                                                    <p>
+                                                        Sản phẩm rất tốt. Giao hàng nhanh.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4 class="text-uppercase">Thêm nhận xét của bạn</h4>
+                                        <p>Nhập vào địa chỉ Email để gửi nhận xét</p>
+                                        <form class="review-form">
+                                            <div class="form-group">
+                                                <input class="input" type="text" placeholder="Họ tên" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input class="input" type="email" placeholder="Địa chỉ Email" />
+                                            </div>
+                                            <div class="form-group">
+                                                <textarea class="input" placeholder="Nhận xét"></textarea>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="input-rating">
+                                                    <strong class="text-uppercase">Đánh giá: </strong>
+                                                    <div class="stars">
+                                                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5"></label>
+                                                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4"></label>
+                                                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3"></label>
+                                                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2"></label>
+                                                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1"></label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button class="primary-btn">Gửi</button>
+                                        </form>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- /Product Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->
+
+
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <!-- section title -->
+            <div class="col-md-12">
+                <div class="section-title">
+                    <h2 class="title">Sản phẩm cùng loại</h2>
+                </div>
+            </div>
+            <!-- section title -->
+            <!-- Product Single -->
+            @foreach (var item in sanphamcungloai)
+            {
+                var url = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <div class="product product-single">
+                        <div class="product-thumb">
+                            <a href="@url" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                            <img width="270" height="320" src="@item.Image" alt="">
+                        </div>
+                        <div class="product-body">
+                            <h2 class="product-name"><a href="@url">@item.Name</a></h2>
+                            <hr />
+                            @if (item.PromotionPrice != null)
+                            {
+                                <h3 class="product-price">
+                                    @item.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.')
+                                    <del class="product-old-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</del>
+                                </h3>
+                            }
+                            else
+                            {
+                                <h3 class="product-price">@item.Price.Value.ToString("#,##0 ₫").Replace(',', '.')</h3>
+                            }
+                            <div class="product-btns">
+                                <a href="@url" class="primary-btn add-to-cart"><i class="fa fa-shopping-cart"></i> Thêm vào giỏ</a>
+                                <button class="main-btn icon-btn"><i class="fa fa-heart"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <!-- /Product Single -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>

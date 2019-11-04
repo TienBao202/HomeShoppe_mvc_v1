@@ -1,0 +1,95 @@
+﻿@model Model.CustomModel.LoginModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Đăng nhập </title>
+    <!-- Bootstrap -->
+    <link href="/Content/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/Content/admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/Content/admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="/Content/admin/vendors/animate.css/animate.min.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/Content/admin/build/css/custom.min.css" rel="stylesheet">
+</head>
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                <section class="login_content">
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post))
+                    {
+                        <h1>Đăng nhập hệ thống</h1>
+                        <div>
+                            @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Tài khoản" })
+                        </div>
+                        <div>
+                            @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @placeholder = "Mật khẩu", @type = "password" })
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+                            <a href="#signup" class="to_register"> Quên mật khẩu?</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="separator">
+                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            <div class="clearfix"></div>
+                            <br />
+                            <div>
+                                <h1><i class="fa fa-bank"></i> HomeShoppe!</h1>
+                                <p>©2016. Phát triển bởi Gentelella Alela! và Bootstrap 3 template</p>
+                            </div>
+                        </div>
+                    }
+                </section>
+            </div>
+            <div id="register" class="animate form registration_form">
+                <section class="login_content">
+                    <form>
+                        <h1>Tìm tài khoản</h1>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập tài khoản" required="" />
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập số điện thoại" required="" />
+                        </div>
+                        <div>
+                            <input type="text" class="form-control" placeholder="Nhập Email" required="" />
+                        </div>
+                        <div>
+                            <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                Bạn đã có tài khoản?
+                                <a href="#signin" class="to_register"> Đăng nhập </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1><i class="fa fa-bank"></i> HomeShoppe!</h1>
+                                <p>©2016. Phát triển bởi Gentelella Alela! và Bootstrap 3 template</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

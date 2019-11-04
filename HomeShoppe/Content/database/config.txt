@@ -1,0 +1,7 @@
+Thay đổi đường dẫn database:
+1. HomeShoppe -> Web.config
+2. Model -> App.config
+
+--------------------------
+1. Trang bán hàng /Home/Index
+2. Trang quản trị /Admin/Login -- tk:admin; mk: 123456

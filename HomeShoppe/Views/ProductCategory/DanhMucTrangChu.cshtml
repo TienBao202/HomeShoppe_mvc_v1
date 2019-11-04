@@ -1,0 +1,83 @@
+﻿@model List<Model.EF.ProductCategory>
+
+<div class="category-nav ">
+    <span class="category-header">DANH MỤC SẢN PHẨM <i class="fa fa-list"></i></span>
+    <ul class="category-list">
+
+        @foreach (var item in Model.Where(x => x.ParentID == null))
+        {
+            var child = Model.Where(x => x.ParentID == item.ID);
+            var parentclass = child.Count() > 0 ? " class= dropdown-toggle data-toggle= dropdown aria-expanded= true" : "";
+            var parenticon = child.Count() > 0 ? " fa-angle-right " : "";
+
+        <li class="dropdown side-dropdown">
+            <a href="/san-pham/@item.MetaTitle-@item.ID" @parentclass><p style="width:15px;height:14px" class="@item.icon"></p> @item.Name <i class= "fa @parenticon"></i></a>
+            @if (child.Count() > 0)
+            {
+                <div class="custom-menu">
+                    <div class="row">
+                        <h4 style="margin-left:5px" class="list-links-title"><a href="/san-pham/@item.MetaTitle-@item.ID"><i class="fa fa-search"></i> Xem tất cả </a></h4>
+                        <hr />
+                        <div class="col-md-4">
+                            <ul class="list-links">
+                                <li>
+                                    <h3 class="list-links-title">DANH MỤC</h3>
+                                </li>
+                                @foreach (var childitem in child)
+                                {
+                                    <li><a href="/san-pham/@childitem.MetaTitle-@childitem.ID">@childitem.Name</a></li>
+                                }
+                            </ul>
+                            <hr>
+                            <ul class="list-links">
+                                <li>
+                                    <h3 class="list-links-title">Lựa chọn mức giá</h3>
+                                </li>
+                                <li><a href="#">Dưới 1 Triệu</a></li>
+                                <li><a href="#">1 Triệu - 3 Triệu</a></li>
+                                <li><a href="#">3 Triệu - 5 Triệu</a></li>
+                                <li><a href="#">5 Triệu - 8 Triệu</a></li>
+                                <li><a href="#">Trên 10 Triệu</a></li>
+                            </ul>
+                            <hr class="hidden-md hidden-lg">
+                            </div>
+                            <div class="col-md-4">
+                                <ul class="list-links">
+                                    <li>
+                                        <h3 class="list-links-title">Tư vấn và tin tức</h3>
+                                    </li>
+                                    <li><a href="#">Tin khuyến mãi</a></li>
+                                    <li><a href="#">Hướng dẫn sử dụng</a></li>
+                                    <li><a href="#">Tin tức về smartphone</a></li>
+                                    <li><a href="#">Đánh giá, trên tay</a></li>
+                                </ul>
+                                <hr>
+                                <ul class="list-links">
+                                    <li>
+                                        <h3 class="list-links-title">Dịch vụ, Chính sách</h3>
+                                    </li>
+                                    <li><a href="#">Trung tâm bảo hành chính hãng</a></li>
+                                    <li><a href="#">Tư vấn đổi - trả</a></li>
+                                    <li><a href="#">Mua hàng trả góp</a></li>
+                                    <li><a href="#">Dịch vụ giao hàng</a></li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 hidden-sm hidden-xs">
+                                <div class="product product-single product-hot">
+                                    <div class="product-thumb">
+                                        <a href="/san-pham/@item.MetaTitle-@item.ID" class="main-btn quick-view"><i class="fa fa-search-plus"></i> Xem</a>
+                                        <img src="@item.image" />
+                                    </div>
+                                    <div class="product-body">
+                                        <span class="product-price"><a href="#" style="font-size:11px"><b>@item.Name</b></a></span>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                    </div>
+                </div>
+            }
+        </li>
+        }
+    </ul>
+</div>

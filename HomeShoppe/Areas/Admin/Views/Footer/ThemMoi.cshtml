@@ -1,0 +1,112 @@
+﻿@model Model.EF.Footer
+
+@{
+    ViewBag.Title = "ThemMoi";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+@section scripts{
+    <script>
+        var editor1 = CKEDITOR.replace('txtContent', {
+            customConfig: '/Areas/Admin/Scripts/plugins/ckeditor/config.js',
+        });
+    </script>
+}
+@section header{
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý Footer</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-8 col-sm-5 col-xs-12 form-group pull-right top_search">
+                @using (Html.BeginForm("Index", "Footer", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control col-md-7 col-xs-12" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Tìm kiếm</button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>TThêm mới Footer</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @using (Html.BeginForm("ThemMoi", "Footer", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+
+                <div class="form-horizontal form-label-left">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @Html.TextBoxFor(model => model.ID, new { @class = "form-control col-md-7 col-xs-12" })
+                            @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.Status) Sử dụng footer này!
+                                </label>
+                                @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-3 col-sm-3 col-xs-12" })
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            @Html.TextAreaFor(model => model.Content, new { @class = "form-control col-md-7 col-xs-12", @id = "txtContent" })
+                            @Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                   
+                    <div class="ln_solid"></div>
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> Lưu lại</button>
+                            <button class="btn btn-default" type="reset"><i class="fa fa-refresh"></i> Nhập lại</button>
+                            <a href="@Url.Action("Index","Footer")" class="btn btn-danger"><i class="fa fa-times"></i> Hủy bỏ</a>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,69 @@
+﻿@model List<Model.CustomModel.GioHangViewModel>
+
+
+@section jsFooter{
+
+    <script src="/Content/website/js/controller/cartcontroller.js"></script>
+}
+
+@if (Model.Count > 0)
+{
+    <li class="header-cart dropdown default-dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <div class="header-btns-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="qty">@Model.Count</span>
+            </div>
+            <strong class="text-uppercase">Giỏ hàng:</strong>
+            <br>
+            <span style="font-size:small">@Model.Sum(x => x.ThanhTien).Value.ToString("#,##0 ₫").Replace(',', '.')</span>
+        </a>
+        <div class="custom-menu">
+            <div id="shopping-cart">
+                <div class="shopping-cart-list">
+                    @foreach (var item in Model)
+                    {
+                        <div class="product product-widget">
+                            <div class="product-thumb">
+                                <img src="@item.Product.Image" alt="">
+                            </div>
+                            <div class="product-body">
+                                @if (item.Product.PromotionPrice != null)
+                                {
+                                    <h3 style="font-size:small" class="product-price">@(item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.') : "Chưa có giá") <span class="qty">x(@item.Quantity)</span></h3>
+                                    <h2 class="product-name"><a href="#">@item.Product.Name</a></h2>
+                                }
+                                else
+                                {
+                                    <h3 style="font-size:small" class="product-price">@(item.Product.Price.HasValue ? item.Product.Price.Value.ToString("#,##0 ₫").Replace(',', '.') : "Chưa có giá") <span class="qty">x(@item.Quantity)</span></h3>
+                                    <h2 class="product-name"><a href="#">@item.Product.Name</a></h2>
+                                }
+                            </div>
+                            <button data-id="@item.Product.ID" class="cancel-btn btn_Delete" data-toggle="tooltip" title="Xóa sản phẩm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                    }
+                </div>
+                <div class="shopping-cart-btns">
+                    <a href="/gio-hang" style="width:auto" class="main-btn"><i class="fa fa-shopping-cart"></i> Giỏ hàng </a>
+                    <a href="/thanh-toan" style="width:auto"  class="primary-btn"><i class="fa fa-shopping-cart"></i> Thanh toán</a>
+                </div>
+            </div>
+        </div>
+    </li>
+}
+else
+{
+    <li class="header-cart dropdown default-dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <div class="header-btns-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="qty">@Model.Count</span>
+            </div>
+            <strong class="text-uppercase">Giỏ hàng:</strong>
+            <br>
+            <span>0 vnđ</span>
+        </a>
+
+    </li>
+}
+

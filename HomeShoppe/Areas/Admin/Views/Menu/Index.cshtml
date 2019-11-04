@@ -1,0 +1,130 @@
+﻿@model PagedList.IPagedList<Model.EF.Menu>
+@using PagedList.Mvc
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@section header{
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý Menu</h3>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="well" style="overflow: auto">
+            @using (Html.BeginForm("Index", "Menu", FormMethod.Get))
+            {
+                <div class="form-group">
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type="text" class="form-control" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa">
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        @Html.DropDownList("menutypeID", (IEnumerable<SelectListItem>)ViewBag.MenuTypeList, "-- Chọn loại menu --", new { @class = "form-control select2" })
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <button type="submit" class="btn btn-primary float-left"><i class="fa fa-search"></i>Tìm kiếm</button>
+                        <a href="@Url.Action("ThemMoiMenu","Menu")" class="btn btn-primary float-left" style="margin-left: 5px;"><i class="fa fa-plus"></i> Thêm mới Menu </a>
+                        <a href="@Url.Action("IndexMenuType","Menu")" class="btn btn-primary float-left" style="margin-left: 5px;"><i class="fa fa-pencil-square-o"></i> Quản lý loại menu</a>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Danh sách menu</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+                    <table class="table table-striped jambo_table bulk_action">
+                        <thead>
+                            <tr class="headings">
+                                <th class="column-title">Tên menu </th>
+                                <th class="column-title">Loại menu</th>
+                                <th class="column-title">Đường dẫn </th>
+                                <th class="column-title">Thứ tự hiển thị </th>
+                                <th class="column-title">Kiểu hiển thị </th>
+                                <th class="column-title">Tình trạng </th>
+                                <th class="column-title no-link last">
+                                    <span class="nobr">Action</span>
+                                </th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+
+                            <tr class="even pointer">
+                                <td class="a-center ">@item.Text</td>
+                                <td class="a-center ">@item.MenuType.Name</td>
+                                <td class=" ">@item.Link</td>
+                                <td class=" ">@item.DisplayOrder</td>
+                                <td class=" ">@item.Target</td>
+                                <td class=" ">
+                                    @if (item.Status != true)
+                                    {
+                                        <span class="badge bg-red">@Html.Raw("Khóa")</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-green">@Html.Raw("Kích hoạt")</span>
+                                    }
+                                </td>
+                                <td class=" last">
+                                    <a href="@Url.Action("CapNhatMenu", new { @id = item.ID })" class="btn-sm btn-primary" data-toggle="tooltip" title="Chỉnh sửa"><i class="fa fa-pencil"></i></a>
+                                    @Ajax.ActionLink(" ", "XoaMenu",new { @id = item.ID}, new AjaxOptions
+                                       {
+                                           Confirm = "Bạn có muốn xóa bản ghi này?",
+                                           OnComplete = "$('#row_" + @item.ID + "').remove()",
+                                           HttpMethod = "Delete"
+                                       }, new { @class = "btn-sm btn-danger fa fa-trash-o" } )
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="nav navbar-right panel_toolbox">
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.searchString }))
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

@@ -1,0 +1,156 @@
+﻿@model List<Model.CustomModel.GioHangViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section jsFooter{
+
+    <script src="/Content/website/js/controller/cartcontroller.js"></script>
+}
+
+@section DanhMuc{
+    @{Html.RenderAction("DanhMucThuNho", "ProductCategory");}
+}
+
+@section breadcrumb{
+    <div id="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb">
+                <li><a href="@Url.Action("Index","Home")">Trang chủ</a></li>
+                <li class="active">Giỏ hàng</li>
+            </ul>
+        </div>
+    </div>
+}
+
+<!-- section -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div id="checkout-form" class="clearfix">
+                <div class="col-md-12">
+                    <div class="order-summary clearfix">
+                        <div class="section-title">
+                            <h3 class="title">Giỏ hàng</h3>
+                        </div>
+                        @if (Model.Count > 0)
+                        {
+                            <table class="shopping-cart-table table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th></th>
+                                        <th class="text-center">Đơn giá</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Thành tiền</th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="thumb"><img src="@item.Product.Image" alt=""></td>
+                                            <td class="details">
+                                                <a href="#">@item.Product.Name</a>
+                                                <ul>
+                                                    <li><span>Thương hiệu: @item.Product.ProductCategory.Name.</span></li>
+                                                    <li><span>Bảo hành: @item.Product.Warranty tháng.</span></li>
+                                                </ul>
+                                            </td>
+                                            <td class="price text-center">
+                                                @if (item.Product.PromotionPrice != null)
+                                                {
+                                                    <strong>
+                                                        @(item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value.ToString("#,##0 ₫").Replace(',', '.') : "Chưa có giá")
+                                                    </strong>
+                                                    <br>
+                                                    <del class="font-weak">
+                                                        <small> @(item.Product.Price.HasValue ? item.Product.Price.Value.ToString("#,##0 ₫").Replace(',', '.') : "Chưa có giá")</small>
+                                                    </del>
+                                                }
+                                                else
+                                                {
+                                                    <strong>
+                                                        @(item.Product.Price.HasValue ? item.Product.Price.Value.ToString("#,##0 ₫").Replace(',', '.') : "Chưa có giá")
+                                                    </strong>
+                                                }
+                                            </td>
+                                            <td class="qty text-center"><input type="number" class="input txt_quantity" data-id="@item.Product.ID" value="@item.Quantity"></td>
+                                            <td class="total text-center">
+                                                <strong class="primary-color">
+                                                    @item.ThanhTien.Value.ToString("#,##0 ₫").Replace(',', '.')
+                                                </strong>
+                                            </td>
+                                            <td class="text-right">
+                                                <button data-id="@item.Product.ID" class="main-btn icon-btn btn_Update" data-toggle="tooltip" title="Cập nhật"><i class="fa fa-refresh"></i></button>
+                                                <button data-id="@item.Product.ID" class="main-btn icon-btn btn_Delete" data-toggle="tooltip" title="Xóa sản phẩm"><i class="fa fa-trash-o"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th class="empty" colspan="3"></th>
+                                        <th>Tạm tính</th>
+                                        <th colspan="2" class="sub-total">
+                                            @Model.Sum(x => x.ThanhTien).Value.ToString("#,##0 ₫").Replace(',', '.')
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="empty" colspan="3"></th>
+                                        <th>Phí vận chuyển</th>
+                                        <td colspan="2">Miễn phí</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="empty" colspan="3"></th>
+                                        <th>Tổng cộng</th>
+                                        <th colspan="2" class="total">
+                                            @Model.Sum(x => x.ThanhTien).Value.ToString("#,##0 ₫").Replace(',', '.')
+                                        </th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                            <div class="pull-right">
+                                <button id="btn_tieptucmuahang" class="primary-btn"><i class="fa fa-arrow-left"></i> Tiếp tục mua hàng</button>
+                                <button id="btn_DeleteAll" class="primary-btn"><i class="fa fa-trash-o"></i> Xóa giỏ hàng</button>
+                                @*<button id="btn_ThanhToan" class="primary-btn"><i class="fa fa-shopping-cart"></i> Thanh toán</button>/thanh-toan*@
+                                <a href="/thanh-toan" id="btn_ThanhToan" class="primary-btn"><i class="fa fa-shopping-cart"></i> Thanh toán</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <span> Không có sản phẩm nào trong giỏ hàng</span>
+                            <table class="shopping-cart-table table">
+                                <thead>
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th></th>
+                                        <th class="text-center">Đơn giá</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-center">Thành tiền</th>
+                                        <th class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            <div class="pull-right">
+                                <button id="btn_tieptucmuahang" class="primary-btn"><i class="fa fa-arrow-left"></i> Tiếp tục mua hàng</button>
+                            </div>
+                        }
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /section -->

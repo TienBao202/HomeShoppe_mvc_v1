@@ -1,0 +1,218 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>HomeShoppe - Admin </title>
+    <!-- Bootstrap -->
+    <link href="/Content/admin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="/Content/admin/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="/Content/admin/vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- bootstrap-daterangepicker -->
+    <link href="/Content/admin/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <!-- Custom Theme Style -->
+    <link href="/Content/admin/build/css/custom.min.css" rel="stylesheet">
+    <link href="/Content/admin/build/css/custom.css" rel="stylesheet">
+</head>
+
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+                    <div class="navbar nav_title" style="border: 0;">
+                        <a href="index.html" class="site_title"><i class="fa fa-google-wallet"></i> <span>HomeShoppe!</span></a>
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <!-- menu profile quick info -->
+                    <div class="profile clearfix">
+                        <div class="profile_pic">
+                            <img src="~/Content/admin/production/images/user3.jpg" alt="..." class="img-circle profile_img">
+                        </div>
+                        <div class="profile_info">
+                            <span>Xin chào,</span>
+                            <h2>Quản trị viên</h2>
+                        </div>
+                    </div>
+                    <!-- /menu profile quick info -->
+                    <hr />
+                    <br />
+
+                    <!-- sidebar menu -->
+                    @RenderPage("AdminNavigation.cshtml")
+                    <!-- /sidebar menu -->
+                    <!-- /menu footer buttons -->
+                    <!-- /menu footer buttons -->
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/Content/admin/production/images/user3.jpg" alt="">Admin
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+                                    <li><a href="javascript:;"> Quản lý tài khoản </a></li>
+                                    <li><a href="javascript:;">Trợ giúp</a></li>
+                                    <li><a href="@Url.Action("Index","Login")"><i class="fa fa-sign-out pull-right"></i>Đăng xuất</a></li>
+                                </ul>
+                            </li>
+
+                            <li role="presentation" class="dropdown">
+                                <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a>
+                                            <span class="image"><img src="images/img.jpg" alt="Profile Image" /></span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where...
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <div class="text-center">
+                                            <a>
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (TempData["AlertMessage"] != null)
+                            {
+
+                                <div class="alert @TempData["AlertType"] alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                    <h5><i class="icon @TempData["AlertIcon"]"></i> @TempData["AlertTitle"]</h5>
+                                    @TempData["AlertMessage"]
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    @RenderSection("header", false)
+                    <div class="clearfix"></div>
+                    @RenderBody()
+
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <!-- jQuery -->
+    <script src="/Content/admin/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+    <!-- Bootstrap -->
+    <script src="/Content/admin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="/Content/admin/vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="/Content/admin/vendors/nprogress/nprogress.js"></script>
+    <!-- jQuery Sparklines -->
+    <script src="/Content/admin/vendors/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+    <!-- Flot -->
+    <script src="/Content/admin/vendors/Flot/jquery.flot.js"></script>
+    <script src="/Content/admin/vendors/Flot/jquery.flot.pie.js"></script>
+    <script src="/Content/admin/vendors/Flot/jquery.flot.time.js"></script>
+    <script src="/Content/admin/vendors/Flot/jquery.flot.stack.js"></script>
+    <script src="/Content/admin/vendors/Flot/jquery.flot.resize.js"></script>
+    <!-- Flot plugins -->
+    <script src="/Content/admin/vendors/flot.orderbars/js/jquery.flot.orderBars.js"></script>
+    <script src="/Content/admin/vendors/flot-spline/js/jquery.flot.spline.min.js"></script>
+    <script src="/Content/admin/vendors/flot.curvedlines/curvedLines.js"></script>
+    <!-- DateJS -->
+    <script src="/Content/admin/vendors/DateJS/build/date.js"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="/Content/admin/vendors/moment/min/moment.min.js"></script>
+    <script src="/Content/admin/vendors/bootstrap-daterangepicker/daterangepicker.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="/Content/admin/build/js/custom.min.js"></script>
+    <script src="~/Areas/Admin/Scripts/plugins/AlertBox.js"></script>
+    <script src="~/Areas/Admin/Scripts/plugins/ckeditor/ckeditor.js"></script>
+    <script src="~/Areas/Admin/Scripts/plugins/ckfinder/ckfinder.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

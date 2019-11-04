@@ -1,0 +1,138 @@
+﻿@model Model.EF.About
+@{
+    ViewBag.Title = "ChiTiet";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+@section header{
+    <div class="page-title">
+        <div class="title_left">
+            <h3>Quản lý trang giới thiệu</h3>
+        </div>
+
+        <div class="title_right">
+            <div class="col-md-8 col-sm-5 col-xs-12 form-group pull-right top_search">
+                @using (Html.BeginForm("Index", "TrangGioiThieu", FormMethod.Get))
+                {
+                    <div class="input-group">
+                        <input type="text" class="form-control col-md-7 col-xs-12" value="@ViewBag.SearchString" name="searchString" placeholder="Nhập từ khóa">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i> Tìm kiếm</button>
+                        </span>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Thông tin trang giới thiệu</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div class="col-md-7 col-sm-7 col-xs-12" style="border:0px solid #e5e5e5;">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <th style="width:50%">Mã trang giới thiệu: </th>
+                                    <td>@Html.DisplayFor(model => model.ID)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tên trang giới thiệu:</th>
+                                    <td>@Html.DisplayFor(model => model.Name)</td>
+                                </tr>
+                                <tr>
+                                    <th>Tên Meta:</th>
+                                    <td>@Html.DisplayFor(model => model.MetaTitle)</td>
+                                </tr>
+
+                                <tr>
+                                    <th>Tình trạng trang giới thiệu:</th>
+                                    <td><span class="badge @ViewBag.status_class">@ViewBag.status</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-12" style="border:0px solid #e5e5e5;">
+                    <div class="">
+                        <a href="@Url.Action("CapNhat", new { @id = Model.ID })" class="btn btn-primary btn-lg"><i class="fa fa-edit m-right-xs"></i> Chỉnh sửa thông tin</a>
+                        <a href="@Url.Action("Index","TrangGioiThieu")" class="btn btn-danger btn-lg"><i class="fa fa-arrow-circle-left"></i> Danh sách trang giới thiệu</a>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="" role="tabpanel" data-example-id="togglable-tabs">
+                        <ul id="myTab" class="nav nav-tabs bar_tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#tab_content1" id="home-tab" role="tab" data-toggle="tab" aria-expanded="true">Mô tả </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#tab_content2" role="tab" id="profile-tab" data-toggle="tab" aria-expanded="false">Chi tiết </a>
+                            </li>
+                            <li role="presentation" class="">
+                                <a href="#tab_content3" role="tab" id="profile-tab2" data-toggle="tab" aria-expanded="false">Hình ảnh</a>
+                            </li>
+                        </ul>
+                        <div id="myTabContent" class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
+                                @Html.Raw(Model.Description)
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
+                                <p>
+                                    @Html.Raw(Model.Detail)
+                                </p>
+                            </div>
+                            <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                                <p>
+                                    <div class="product_gallery">
+                                        <a>
+                                            <img src="@Html.DisplayFor(model => model.Image)" alt="..." />
+                                        </a>
+                                        <a>
+                                            <img src="images/prod-3.jpg" alt="..." />
+                                        </a>
+                                        <a>
+                                            <img src="images/prod-4.jpg" alt="..." />
+                                        </a>
+                                        <a>
+                                            <img src="images/prod-5.jpg" alt="..." />
+                                        </a>
+                                    </div>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,209 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="row top_tiles">
+    <div class="row">
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-users fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.TotalUser</div>
+                            <div>Thành viên!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="@Url.Action("Index","ThanhVien")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-green">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-cubes fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.TotalProduct</div>
+                            <div>Sản phẩm!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="@Url.Action("Index","SanPham")">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-yellow">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-shopping-cart fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">@ViewBag.TotalOrder 0</div>
+                            <div>Đơn hàng!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">Xem chi tiết</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="fa fa-support fa-5x"></i>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <div class="huge">13</div>
+                            <div>Support Tickets!</div>
+                        </div>
+                    </div>
+                </div>
+                <a href="#">
+                    <div class="panel-footer">
+                        <span class="pull-left">View Details</span>
+                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                        <div class="clearfix"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Hệ thống quản trị website</h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <div class="bs-example" data-example-id="simple-jumbotron">
+                    <div class="jumbotron">
+                        <h1>HomeShoppe!</h1>
+                        <p>Chào bạn đến với trang quản trị website HomeShoppe.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Thống kê truy cập</h2>
+                 <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Settings 1</a>
+                        </li>
+                        <li><a href="#">Settings 2</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                  </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                @{
+                    HttpApplicationState thongke = HttpContext.Current.ApplicationInstance.Application;
+                }
+                <div class="list-group">
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-sign-in fa-fw"></i> Thành viên đang truy cập
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-green">@thongke["DangTruyNhap"]</span></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-sign-out fa-fw"></i> Thành viên đã truy cập
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-red">@thongke["DaTruyNhap"]</span></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-users fa-fw"></i> Tổng thành viên
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-blue">@ViewBag.TotalUser</span></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-user fa-fw"></i> Quản trị viên
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-orange">@ViewBag.Admin</span></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-user fa-fw"></i> Nhân viên
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-orange">@ViewBag.Empploye</span></em>
+                        </span>
+                    </a>
+                    <a href="#" class="list-group-item">
+                        <i class="fa fa-user fa-fw"></i> Khách hàng
+                        <span class="pull-right text-muted small">
+                            <em><span class="badge bg-green">@ViewBag.Member</span></em>
+                        </span>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
